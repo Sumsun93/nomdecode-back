@@ -1,0 +1,12 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/aaron5670/ExpressJS-SocketIO-Boilerplate.git",
+  "author": "Mathieu <mathieu.dumontier@oclock.io>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4",
+    "socket.io": "^4.6.1"
+  }
+}
