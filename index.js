@@ -6,7 +6,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello world</h1>');
+    res.send('<h1>Bonjour. Allez-vous-en !</h1>');
 });
 
 const lobbies = {};
@@ -26,8 +26,11 @@ io.on('connection', (socket) => {
 
     socket.on('joinLobby', (lobbyId) => {
         console.log('joinLobby');
-        lobbies[lobbyId].players.push(socket.id);
+        if (!lobbies[lobbyId].players.includes(socket.id)) {
+            lobbies[lobbyId].players.push(socket.id);
+        }
         socket.join(lobbyId);
+        console.log('OK', lobbies);
     });
 
     socket.on('leaveLobby', (lobbyId) => {
@@ -38,7 +41,7 @@ io.on('connection', (socket) => {
 
     socket.on('chat', (message) => {
         console.log('chat');
-        io.to(message.lobbyId).emit('chat', message);
+        io.to(message.lobbyId).emit('chat', message); // io.to(message.lobbyId) ??
     });
 
     socket.on('disconnect', () => {
