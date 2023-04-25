@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
 
     socket.on('joinLobby', (lobbyId) => {
         console.log('joinLobby');
-        if (!lobbies[lobbyId].players.includes(socket.id)) {
+        if (!lobbies[lobbyId].players?.includes(socket.id)) {
             lobbies[lobbyId].players.push(socket.id);
         }
         socket.join(lobbyId);
@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('chat', (message) => {
-        console.log('chat');
+        console.log('chat', message);
         io.to(message.lobbyId).emit('chat', message); // io.to(message.lobbyId) ??
     });
 
